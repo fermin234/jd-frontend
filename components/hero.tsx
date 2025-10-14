@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
+import Link from "next/link"
 
 export function Hero() {
   return (
@@ -23,7 +24,9 @@ export function Hero() {
           Descubre nuestra colección de decoración escandinava para crear espacios únicos y acogedores
         </p>
         <Button size="lg" className="group">
+          <Link href="/products">
           Explorar Productos
+          </Link>
           <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
         </Button>
       </div>

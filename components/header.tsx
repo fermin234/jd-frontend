@@ -29,7 +29,7 @@ export function Header() {
               Inicio
             </Link>
             <Link
-              href="#productos"
+              href="/products"
               className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
             >
               Productos
@@ -104,7 +104,7 @@ export function Header() {
                 Inicio
               </Link>
               <Link
-                href="#productos"
+                href="/products"
                 className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
               >
