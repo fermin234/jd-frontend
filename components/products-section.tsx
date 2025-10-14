@@ -5,61 +5,62 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { ShoppingCart, Search } from "lucide-react"
+import { useCart } from "@/lib/cart-context"
 
 const allProducts = [
   {
-    id: 1,
+    id: "1",
     name: "Jarrón Cerámico Minimalista",
-    price: "$45.00",
+    price: 45,
     category: "living",
     image: "/minimalist-ceramic-vase-beige.jpg",
   },
   {
-    id: 2,
+    id: "2",
     name: "Cojín Texturizado Natural",
-    price: "$28.00",
+    price: 28,
     category: "dormitorio",
     image: "/textured-natural-cushion-pillow.jpg",
   },
   {
-    id: 3,
+    id: "3",
     name: "Espejo Redondo Dorado",
-    price: "$89.00",
+    price: 89,
     category: "living",
     image: "/round-gold-mirror-wall-decor.jpg",
   },
   {
-    id: 4,
+    id: "4",
     name: "Maceta de Cerámica",
-    price: "$35.00",
+    price: 35,
     category: "living",
     image: "/ceramic-plant-pot-modern.jpg",
   },
   {
-    id: 5,
+    id: "5",
     name: "Lámpara de Mesa Moderna",
-    price: "$125.00",
+    price: 125,
     category: "dormitorio",
     image: "/modern-table-lamp-scandinavian.jpg",
   },
   {
-    id: 6,
+    id: "6",
     name: "Set de Bowls Artesanales",
-    price: "$65.00",
+    price: 65,
     category: "cocina",
     image: "/artisan-ceramic-bowls-set.jpg",
   },
   {
-    id: 7,
+    id: "7",
     name: "Manta de Algodón",
-    price: "$55.00",
+    price: 55,
     category: "dormitorio",
     image: "/cotton-throw-blanket-neutral.jpg",
   },
   {
-    id: 8,
+    id: "8",
     name: "Tabla de Cortar Madera",
-    price: "$42.00",
+    price: 42,
     category: "cocina",
     image: "/wooden-cutting-board-kitchen.jpg",
   },
@@ -70,6 +71,7 @@ const categories = ["Todos", "Living", "Dormitorio", "Cocina"]
 export function ProductsSection() {
   const [selectedCategory, setSelectedCategory] = useState("Todos")
   const [searchQuery, setSearchQuery] = useState("")
+  const { addItem } = useCart()
 
   const filteredProducts = allProducts.filter((product) => {
     const matchesCategory = selectedCategory === "Todos" || product.category === selectedCategory.toLowerCase()
@@ -145,9 +147,21 @@ export function ProductsSection() {
                   <CardFooter className="flex flex-col items-start p-4 space-y-3">
                     <div className="w-full">
                       <h3 className="font-medium text-foreground mb-1">{product.name}</h3>
-                      <p className="text-lg font-semibold text-primary">{product.price}</p>
+                      <p className="text-lg font-semibold text-primary">${product.price}</p>
                     </div>
-                    <Button className="w-full" size="sm">
+                    <Button
+                      className="w-full"
+                      size="sm"
+                      onClick={() =>
+                        addItem({
+                          id: product.id,
+                          name: product.name,
+                          price: product.price,
+                          image: product.image,
+                          category: product.category,
+                        })
+                      }
+                    >
                       <ShoppingCart className="mr-2 h-4 w-4" />
                       Agregar al carrito
                     </Button>
