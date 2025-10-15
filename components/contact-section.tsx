@@ -33,7 +33,7 @@ useEffect(() => {
     if (rafRef.current) cancelAnimationFrame(rafRef.current);
     rafRef.current = requestAnimationFrame(() => {
       // scale evita bordes; translateY aplica el parallax visible
-      bgRef.current!.style.transform = `translateY(${offset}px) scale(1.1)`;
+      bgRef.current!.style.transform = `translateY(${offset}px) scale(1.2)`;
     });
   };
 
@@ -62,7 +62,7 @@ useEffect(() => {
           style={{
             // el alto de la imagen es mayor que la sección
             height: "160%",
-            top: "-30%",
+            top: "-40%",
             backgroundImage: "url('/contact-section.jpeg')",
             backgroundSize: "cover",
             backgroundPosition: "center",
