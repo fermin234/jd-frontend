@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { Menu, Search, ShoppingCart, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -11,6 +12,8 @@ export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
   const { totalItems } = useCart()
+  const pathname = usePathname()
+  const isHome = pathname === "/"
 
   return (
     <header className="sticky top-0 z-50 w-full bg-foreground/95 backdrop-blur supports-[backdrop-filter]:bg-foreground/90">
@@ -22,29 +25,31 @@ export function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            <Link href="/" className="text-sm font-medium text-background hover:text-primary transition-colors">
-              Inicio
-            </Link>
-            <Link
-              href="#products"
-              className="text-sm font-medium text-background/80 hover:text-primary transition-colors"
-            >
-              Productos
-            </Link>
-            <Link
-              href="#nosotros"
-              className="text-sm font-medium text-background/80 hover:text-primary transition-colors"
-            >
-              Nosotros
-            </Link>
-            <Link
-              href="#contacto"
-              className="text-sm font-medium text-background/80 hover:text-primary transition-colors"
-            >
-              Contacto
-            </Link>
-          </nav>
+          {isHome && (
+            <nav className="hidden md:flex items-center space-x-8">
+              <Link href="/" className="text-sm font-medium text-background hover:text-primary transition-colors">
+                Inicio
+              </Link>
+              <Link
+                href="#products"
+                className="text-sm font-medium text-background/80 hover:text-primary transition-colors"
+              >
+                Productos
+              </Link>
+              <Link
+                href="#nosotros"
+                className="text-sm font-medium text-background/80 hover:text-primary transition-colors"
+              >
+                Nosotros
+              </Link>
+              <Link
+                href="#contacto"
+                className="text-sm font-medium text-background/80 hover:text-primary transition-colors"
+              >
+                Contacto
+              </Link>
+            </nav>
+          )}
 
           {/* Right Actions */}
           <div className="flex items-center space-x-4">
@@ -62,14 +67,16 @@ export function Header() {
             </Link>
 
             {/* Mobile Menu Toggle */}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="md:hidden text-background hover:text-primary hover:bg-background/10"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            >
-              {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </Button>
+            {isHome && (
+              <Button
+                variant="ghost"
+                size="icon"
+                className="md:hidden text-background hover:text-primary hover:bg-background/10"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              >
+                {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              </Button>
+            )}
           </div>
         </div>
 
@@ -81,7 +88,7 @@ export function Header() {
         )}
 
         {/* Mobile Menu */}
-        {mobileMenuOpen && (
+        {mobileMenuOpen && isHome && (
           <div className="md:hidden py-4 border-t border-background/20">
             <nav className="flex flex-col space-y-4">
               <Link
