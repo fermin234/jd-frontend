@@ -15,8 +15,14 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "Deco Interior - Decoración de Interiores",
-  description: "Tienda online de decoración de interiores con estilo escandinavo",
+  title: "Juanita Deco",
+  description: "Juanita Deco - Venta por mayor de borlas - almohadas - Mantas - Budas - Adornos",
+  icons: [
+    {
+      url: "/logo-OK-Juanita-Deco-2-100x100.png",
+      rel: "icon"
+    }
+  ],
 }
 
 export default function RootLayout({
