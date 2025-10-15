@@ -40,7 +40,7 @@ export function Footer() {
           </div>
 
           {/* Contact Info */}
-            <div className="flex justify-center items-center space-x-6">
+            <div className="flex flex-col sm:flex-row justify-center items-center space-x-6">
               <div className="flex items-start justify-center space-x-2">
                 <Mail className="h-5 w-5 text-primary mt-1" />
                 <div className="flex items-start space-x-4">
