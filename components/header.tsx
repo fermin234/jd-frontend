@@ -13,42 +13,40 @@ export function Header() {
   const { totalItems } = useCart()
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-foreground/95 backdrop-blur supports-[backdrop-filter]:bg-foreground/90">
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <div className="flex flex-col">
-              <span className="font-serif text-2xl font-semibold tracking-tight text-foreground">Deco Interior</span>
-            </div>
+            <img src="/logo-OK-Juanita-Deco.png" alt="Juanita Deco" height={40} width={120} />
           </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <Link href="/" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+            <Link href="/" className="text-sm font-medium text-background hover:text-primary transition-colors">
               Inicio
             </Link>
             <Link
               href="/products"
-              className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+              className="text-sm font-medium text-background/80 hover:text-primary transition-colors"
             >
               Productos
             </Link>
             <Link
               href="#ambientes"
-              className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+              className="text-sm font-medium text-background/80 hover:text-primary transition-colors"
             >
               Ambientes
             </Link>
             <Link
               href="#nosotros"
-              className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+              className="text-sm font-medium text-background/80 hover:text-primary transition-colors"
             >
               Nosotros
             </Link>
             <Link
               href="#contacto"
-              className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+              className="text-sm font-medium text-background/80 hover:text-primary transition-colors"
             >
               Contacto
             </Link>
@@ -57,13 +55,13 @@ export function Header() {
           {/* Right Actions */}
           <div className="flex items-center space-x-4">
             {/* Search */}
-            <Button variant="ghost" size="icon" onClick={() => setSearchOpen(!searchOpen)} className="hidden md:flex">
+            <Button variant="ghost" size="icon" onClick={() => setSearchOpen(!searchOpen)} className="hidden md:flex text-background hover:text-primary hover:bg-background/10">
               <Search className="h-5 w-5" />
             </Button>
 
             {/* Cart - Now links to cart page */}
             <Link href="/cart">
-              <Button variant="ghost" size="icon" className="relative">
+              <Button variant="ghost" size="icon" className="relative text-background hover:text-primary hover:bg-background/10">
                 <ShoppingCart className="h-5 w-5" />
                 {totalItems > 0 && (
                   <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-primary text-primary-foreground text-xs flex items-center justify-center">
@@ -77,7 +75,7 @@ export function Header() {
             <Button
               variant="ghost"
               size="icon"
-              className="md:hidden"
+              className="md:hidden text-background hover:text-primary hover:bg-background/10"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -87,52 +85,52 @@ export function Header() {
 
         {/* Search Bar */}
         {searchOpen && (
-          <div className="py-4 border-t border-border">
-            <Input type="search" placeholder="Buscar productos..." className="max-w-md" />
+          <div className="py-4 border-t border-background/20">
+            <Input type="search" placeholder="Buscar productos..." className="max-w-md bg-background/10 text-background placeholder:text-background/60 border-background/30" />
           </div>
         )}
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden py-4 border-t border-border">
+          <div className="md:hidden py-4 border-t border-background/20">
             <nav className="flex flex-col space-y-4">
               <Link
                 href="/"
-                className="text-sm font-medium text-foreground hover:text-primary transition-colors"
+                className="text-sm font-medium text-background hover:text-primary transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Inicio
               </Link>
               <Link
                 href="/products"
-                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+                className="text-sm font-medium text-background/80 hover:text-primary transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Productos
               </Link>
               <Link
                 href="#ambientes"
-                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+                className="text-sm font-medium text-background/80 hover:text-primary transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Ambientes
               </Link>
               <Link
                 href="#nosotros"
-                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+                className="text-sm font-medium text-background/80 hover:text-primary transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Nosotros
               </Link>
               <Link
                 href="#contacto"
-                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+                className="text-sm font-medium text-background/80 hover:text-primary transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Contacto
               </Link>
               <div className="pt-4">
-                <Input type="search" placeholder="Buscar productos..." />
+                <Input type="search" placeholder="Buscar productos..." className="bg-background/10 text-background placeholder:text-background/60 border-background/30" />
               </div>
             </nav>
           </div>
