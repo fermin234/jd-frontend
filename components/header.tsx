@@ -13,7 +13,7 @@ export function Header() {
   const { totalItems } = useCart()
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border bg-foreground/95 backdrop-blur supports-[backdrop-filter]:bg-foreground/90">
+    <header className="sticky top-0 z-50 w-full bg-foreground/95 backdrop-blur supports-[backdrop-filter]:bg-foreground/90">
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}

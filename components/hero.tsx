@@ -18,10 +18,10 @@ export function Hero() {
 
       <div className="relative z-10 container mx-auto px-4 text-center">
         <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 text-balance">
-          Transforma tu hogar con estilo
+          Juanita Deco
         </h1>
         <p className="text-lg md:text-xl text-white/90 mb-8 max-w-2xl mx-auto text-pretty">
-          Descubre nuestra colección de decoración escandinava para crear espacios únicos y acogedores
+          Descubrí la calidez de lo artesanal en cada uno de mis productos
         </p>
         <Button size="lg" className="group">
           <Link href="/products">

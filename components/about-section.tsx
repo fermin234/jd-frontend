@@ -4,27 +4,20 @@ export function AboutSection() {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="order-2 md:order-1">
-            <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-6">Sobre Nosotros</h2>
+            <h2 className="font-serif text-3xl md:text-4xl font-light text-foreground mb-6">Juanita Deco</h2>
+            <h6 className="font-serif text-xl md:text-2xl font-bold text-foreground mb-6">Decora tu casa</h6>
             <div className="space-y-4 text-muted-foreground leading-relaxed">
               <p>
-                En <span className="font-semibold text-foreground">Deco Interior</span>, creemos que cada espacio merece
-                ser único y especial. Nos dedicamos a ofrecer productos de decoración cuidadosamente seleccionados que
-                combinan funcionalidad con diseño escandinavo.
+                Decora tu casa con detalles que transmitan calidez y estilo. Incorpora mantas suaves y acogedoras para crear un ambiente relajante, y añade borlas en los rincones para un toque bohemio y chic. Los budas, ya sean pequeñas figuras o cuadros, aportarán serenidad y equilibrio a tus espacios. Completa la decoración con almohadones de colores y texturas variadas, que no solo suman confort, sino también personalidad a cada rincón.
               </p>
               <p>
-                Nuestra pasión es ayudarte a crear ambientes que reflejen tu personalidad y estilo de vida. Trabajamos
-                con artesanos y diseñadores para traerte piezas únicas que transformarán tu hogar en un refugio
-                acogedor.
-              </p>
-              <p>
-                Cada producto en nuestra colección ha sido elegido pensando en la calidad, durabilidad y estética
-                atemporal que caracteriza al diseño escandinavo.
+                ¡Transforma tu hogar en un refugio lleno de armonía y buen gusto!
               </p>
             </div>
           </div>
           <div className="order-1 md:order-2">
             <div className="relative aspect-[4/3] rounded-lg overflow-hidden">
-              <img src="/scandinavian-interior-design-studio-workspace.jpg" alt="Sobre nosotros" className="w-full h-full object-cover" />
+              <img src="/logo-OK-Juanita-Deco-2.png" alt="Sobre nosotros" className="w-80% h-90% object-cover" />
             </div>
           </div>
         </div>
