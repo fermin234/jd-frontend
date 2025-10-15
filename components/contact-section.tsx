@@ -1,19 +1,51 @@
 "use client"
 
 import type React from "react"
+import { useEffect, useRef } from "react"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { Mail, MapPin, Phone } from "lucide-react"
 
 export function ContactSection() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    message: "",
-  })
+  const [formData, setFormData] = useState({ name:"", email:"", phone:"", message:"" })
+  const sectionRef = useRef<HTMLElement | null>(null)
+  const bgRef = useRef<HTMLDivElement | null>(null)
+  const rafRef = useRef<number | null>(null)
+
+  const PARALLAX_PX = 220; // más movimiento (ajustable)
+
+useEffect(() => {
+  const onScroll = () => {
+    if (!sectionRef.current || !bgRef.current) return;
+
+    const rect = sectionRef.current.getBoundingClientRect();
+    const vh = window.innerHeight;
+
+    // Distancia del centro de la sección al centro del viewport (-1 a 1 aprox)
+    const sectionCenter = rect.top + rect.height / 2;
+    const viewportCenter = vh / 2;
+    const normalized = (sectionCenter - viewportCenter) / ((vh + rect.height) / 2);
+
+    // Desplazamiento
+    const offset = normalized * PARALLAX_PX;
+
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    rafRef.current = requestAnimationFrame(() => {
+      // scale evita bordes; translateY aplica el parallax visible
+      bgRef.current!.style.transform = `translateY(${offset}px) scale(1.1)`;
+    });
+  };
+
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll);
+  return () => {
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    window.removeEventListener("scroll", onScroll);
+    window.removeEventListener("resize", onScroll);
+  };
+}, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -21,17 +53,28 @@ export function ContactSection() {
   }
 
   return (
-    <section
-      id="contacto"
-      className="relative py-16 md:py-24 bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: "url('/contact-section.jpeg')" }}
-    >
-      {/* Overlay un poco más oscuro para mejor contraste */}
-      <div className="absolute inset-0 bg-black/35" />
+    <section id="contacto" ref={sectionRef} className="relative py-16 md:py-24 overflow-hidden">
+      {/* Fondo con parallax */}
+      <div className="absolute inset-0 -z-10 pointer-events-none">
+        <div
+          ref={bgRef}
+          className="absolute left-0 right-0 top-0 will-change-transform"
+          style={{
+            // el alto de la imagen es mayor que la sección
+            height: "160%",
+            top: "-30%",
+            backgroundImage: "url('/contact-section.jpeg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            transform: "translateY(0px) scale(1.1)", // un leve zoom para cubrir
+          }}
+        />
+        <div className="absolute inset-0 bg-black/35" />
+      </div>
 
       <div className="relative container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* FORM IZQUIERDA */}
+          {/* Formulario */}
           <form onSubmit={handleSubmit} className="space-y-6">
             <Input
               id="name"
@@ -74,27 +117,21 @@ export function ContactSection() {
             </Button>
           </form>
 
-          {/* COLUMNA DERECHA */}
+          {/* Texto derecha */}
           <div className="self-center text-white">
             <div className="max-w-xl">
-              {/* “Contacto” en cursiva serif */}
               <p className="font-serif italic text-2xl md:text-3xl mb-2 drop-shadow-[0_1px_1px_rgba(0,0,0,0.6)]">
                 Contacto
               </p>
-
-              {/* Título grande serif, multilinea, con buen leading */}
               <h2 className="font-serif font-light text-5xl md:text-6xl leading-tight mb-4 drop-shadow-[0_2px_2px_rgba(0,0,0,0.55)]">
                 No dude en hacer<br />tu consulta
               </h2>
-
-              {/* Texto descriptivo más chico y ancho controlado */}
               <p className="text-white/90 leading-relaxed mb-6 drop-shadow-[0_1px_1px_rgba(0,0,0,0.6)]">
                 Si desea contactarse con nosotros por consultas o presupuestos, por favor
                 complete el siguiente formulario.
               </p>
             </div>
           </div>
-          {/* /col derecha */}
         </div>
       </div>
     </section>
