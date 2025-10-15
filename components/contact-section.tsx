@@ -1,112 +1,100 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { Card, CardContent } from "@/components/ui/card"
 import { Mail, MapPin, Phone } from "lucide-react"
 
 export function ContactSection() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    phone: "",
     message: "",
   })
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission
     console.log("Form submitted:", formData)
   }
 
   return (
-    <section id="contacto" className="py-16 md:py-24">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-4">Contacto</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">¿Tienes alguna pregunta? Estamos aquí para ayudarte</p>
-        </div>
+    <section
+      id="contacto"
+      className="relative py-16 md:py-24 bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: "url('/contact-section.jpeg')" }}
+    >
+      {/* Overlay un poco más oscuro para mejor contraste */}
+      <div className="absolute inset-0 bg-black/35" />
 
+      <div className="relative container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Contact Form */}
-          <Card>
-            <CardContent className="p-6">
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
-                    Nombre
-                  </label>
-                  <Input
-                    id="name"
-                    type="text"
-                    placeholder="Tu nombre"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    required
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
-                    Email
-                  </label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="tu@email.com"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    required
-                  />
-                </div>
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
-                    Mensaje
-                  </label>
-                  <Textarea
-                    id="message"
-                    placeholder="Escribe tu mensaje aquí..."
-                    rows={5}
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    required
-                  />
-                </div>
-                <Button type="submit" className="w-full">
-                  Enviar Mensaje
-                </Button>
-              </form>
-            </CardContent>
-          </Card>
+          {/* FORM IZQUIERDA */}
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <Input
+              id="name"
+              type="text"
+              placeholder="Nombre"
+              value={formData.name}
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              required
+              className="font-serif bg-white/45 border border-white/70 placeholder:text-black/70 text-black/80 focus:border-white focus:ring-1 focus:ring-white"
+            />
+            <Input
+              id="email"
+              type="email"
+              placeholder="Email"
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              required
+              className="font-serif bg-white/45 border border-white/70 placeholder:text-black/70 text-black/80 focus:border-white focus:ring-1 focus:ring-white"
+            />
+            <Input
+              id="phone"
+              type="tel"
+              placeholder="Teléfono"
+              value={formData.phone}
+              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+              required
+              className="font-serif bg-white/45 border border-white/70 placeholder:text-black/70 text-black/80 focus:border-white focus:ring-1 focus:ring-white"
+            />
+            <Textarea
+              id="message"
+              placeholder="Mensaje"
+              rows={5}
+              value={formData.message}
+              onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+              required
+              className="font-serif bg-white/45 border border-white/70 placeholder:text-black/70 text-black/80 focus:border-white focus:ring-1 focus:ring-white"
+            />
+            <Button type="submit" className="font-serif w-full bg-transparent hover:bg-white/10 text-white border border-white">
+              Enviar Consulta
+            </Button>
+          </form>
 
-          {/* Contact Info & Map */}
-          <div className="space-y-6">
-            <div className="space-y-4">
-              <div className="flex items-start space-x-4">
-                <MapPin className="h-5 w-5 text-primary mt-1" />
-                <div>
-                  <h3 className="font-semibold text-foreground mb-1">Dirección</h3>
-                  <p className="text-muted-foreground">Av. Principal 1234, Buenos Aires, Argentina</p>
-                </div>
-              </div>
-              <div className="flex items-start space-x-4">
-                <Phone className="h-5 w-5 text-primary mt-1" />
-                <div>
-                  <h3 className="font-semibold text-foreground mb-1">Teléfono</h3>
-                  <p className="text-muted-foreground">+54 11 1234-5678</p>
-                </div>
-              </div>
-              <div className="flex items-start space-x-4">
-                <Mail className="h-5 w-5 text-primary mt-1" />
-                <div>
-                  <h3 className="font-semibold text-foreground mb-1">Email</h3>
-                  <p className="text-muted-foreground">info@decointerior.com</p>
-                </div>
-              </div>
+          {/* COLUMNA DERECHA */}
+          <div className="self-center text-white">
+            <div className="max-w-xl">
+              {/* “Contacto” en cursiva serif */}
+              <p className="font-serif italic text-2xl md:text-3xl mb-2 drop-shadow-[0_1px_1px_rgba(0,0,0,0.6)]">
+                Contacto
+              </p>
+
+              {/* Título grande serif, multilinea, con buen leading */}
+              <h2 className="font-serif font-light text-5xl md:text-6xl leading-tight mb-4 drop-shadow-[0_2px_2px_rgba(0,0,0,0.55)]">
+                No dude en hacer<br />tu consulta
+              </h2>
+
+              {/* Texto descriptivo más chico y ancho controlado */}
+              <p className="text-white/90 leading-relaxed mb-6 drop-shadow-[0_1px_1px_rgba(0,0,0,0.6)]">
+                Si desea contactarse con nosotros por consultas o presupuestos, por favor
+                complete el siguiente formulario.
+              </p>
             </div>
           </div>
+          {/* /col derecha */}
         </div>
       </div>
     </section>

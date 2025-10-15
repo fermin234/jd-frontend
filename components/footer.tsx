@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { Facebook, Instagram, Twitter, CreditCard } from "lucide-react"
+import { Mail, House, Phone } from "lucide-react"
 
 export function Footer() {
   return (
@@ -38,12 +39,31 @@ export function Footer() {
             </div>
           </div>
 
+          {/* Contact Info */}
+            <div className="flex justify-center items-center space-x-6">
+              <div className="flex items-start justify-center space-x-2">
+                <Mail className="h-5 w-5 text-primary mt-1" />
+                <div className="flex items-start space-x-4">
+                  <p className="text-muted-foreground">info@juanitadeco.com.ar</p>
+                </div>
+              </div>
+              <div className="flex items-start justify-center space-x-2">
+                <Phone className="h-5 w-5 text-primary mt-1" />
+                <div className="flex items-start space-x-4">
+                  <p className="text-muted-foreground">+54 9 11-7616-4961</p>
+                </div>
+              </div>
+              <div className="flex items-start justify-center space-x-2">
+                <House className="h-5 w-5 text-primary mt-1" />
+                <div className="flex items-start space-x-4">
+                  <p className="text-muted-foreground">La Cumbre - Buenos Aires</p>
+                </div>
+              </div>
+            </div>
 
-
-          {/* Social & Payment */}
+          {/* Social */}
           <div className="flex flex-col items-center justify-center">
-            <h4 className="font-semibold text-foreground mb-4">Síguenos</h4>
-            <div className="flex justify-center space-x-4 mb-6">
+            <div className="flex justify-center space-x-4 mb-3">
               <Link href="#" className="text-muted-foreground hover:text-primary transition-colors">
                 <Instagram className="h-5 w-5" />
               </Link>
