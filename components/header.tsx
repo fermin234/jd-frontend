@@ -27,16 +27,10 @@ export function Header() {
               Inicio
             </Link>
             <Link
-              href="/products"
+              href="#products"
               className="text-sm font-medium text-background/80 hover:text-primary transition-colors"
             >
               Productos
-            </Link>
-            <Link
-              href="#ambientes"
-              className="text-sm font-medium text-background/80 hover:text-primary transition-colors"
-            >
-              Ambientes
             </Link>
             <Link
               href="#nosotros"
@@ -54,10 +48,6 @@ export function Header() {
 
           {/* Right Actions */}
           <div className="flex items-center space-x-4">
-            {/* Search */}
-            <Button variant="ghost" size="icon" onClick={() => setSearchOpen(!searchOpen)} className="hidden md:flex text-background hover:text-primary hover:bg-background/10">
-              <Search className="h-5 w-5" />
-            </Button>
 
             {/* Cart - Now links to cart page */}
             <Link href="/cart">
@@ -102,18 +92,11 @@ export function Header() {
                 Inicio
               </Link>
               <Link
-                href="/products"
+                href="#products"
                 className="text-sm font-medium text-background/80 hover:text-primary transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Productos
-              </Link>
-              <Link
-                href="#ambientes"
-                className="text-sm font-medium text-background/80 hover:text-primary transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Ambientes
               </Link>
               <Link
                 href="#nosotros"

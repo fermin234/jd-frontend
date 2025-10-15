@@ -64,10 +64,10 @@ export function Footer() {
           {/* Social */}
           <div className="flex flex-col items-center justify-center">
             <div className="flex justify-center space-x-4 mb-3">
-              <Link href="#" className="text-muted-foreground hover:text-primary transition-colors">
+              <Link href="https://www.instagram.com/juanitadeco.ok/" className="text-muted-foreground hover:text-primary transition-colors">
                 <Instagram className="h-5 w-5" />
               </Link>
-              <Link href="#" className="text-muted-foreground hover:text-primary transition-colors">
+              <Link href="https://www.facebook.com/juanitadeco.ok" className="text-muted-foreground hover:text-primary transition-colors">
                 <Facebook className="h-5 w-5" />
               </Link>
             </div>
