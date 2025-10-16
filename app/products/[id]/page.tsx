@@ -78,7 +78,7 @@ export default function ProductDetailPage() {
         id: product.id,
         name: product.name,
         price: typeof product.price === "string" ? parseFloat(product.price) : product.price,
-        image: product.imageUrl || "/placeholder.svg",
+        image: product.imageUrl || "/empty-card.png",
         category: product.category?.name || "Sin categoría",
       })
     }
@@ -153,7 +153,7 @@ export default function ProductDetailPage() {
               <CardContent className="p-0">
                 <div className="relative aspect-square">
                   <img
-                    src={images[selectedImage] || "/placeholder.svg"}
+                    src={images[selectedImage] || "/empty-card.png"}
                     alt={product.name}
                     className="w-full h-full object-cover"
                   />
@@ -172,7 +172,7 @@ export default function ProductDetailPage() {
                       selectedImage === index ? "border-primary" : "border-transparent hover:border-muted"
                     }`}
                   >
-                    <img src={image || "/placeholder.svg"} alt={`${product.name} ${index + 1}`} className="w-full h-full object-cover" />
+                    <img src={image || "/empty-card.png"} alt={`${product.name} ${index + 1}`} className="w-full h-full object-cover" />
                   </button>
                 ))}
               </div>

@@ -137,7 +137,7 @@ export function ProductsSection() {
                   <Link href={`/products/${p.id}`} className="block">
                     <div className="relative aspect-[3/4] overflow-hidden">
                       <img
-                        src={p.imageUrl || "/placeholder.svg"}
+                        src={p.imageUrl || "/empty-card.png"}
                         alt={p.name}
                         className="absolute inset-0 h-full w-full object-cover"
                       />
