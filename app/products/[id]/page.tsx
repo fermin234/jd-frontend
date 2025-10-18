@@ -189,10 +189,10 @@ export default function ProductDetailPage() {
             )}
 
             {/* Title */}
-            <div>
+            {/* <div>
               <h1 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-2">{product.name}</h1>
               <p className="text-sm text-muted-foreground">SKU: {product.barcode}</p>
-            </div>
+            </div> */}
 
             {/* Price */}
             <div>
