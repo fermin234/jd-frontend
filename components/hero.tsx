@@ -16,7 +16,7 @@ const SLIDES: Slide[] = [
   { src: "/slider-3.jpeg", subtitle: "Piezas únicas, hechas a mano" },
 ]
 
-const INTERVAL_MS = 6000   // tiempo en cada slide
+const INTERVAL_MS = 2500   // tiempo en cada slide
 const FADE_MS = 800        // duración del crossfade
 
 export function Hero() {
@@ -83,7 +83,7 @@ export function Hero() {
           ))}
         </div>
 
-        <Button asChild size="lg" className="group">
+        <Button asChild size="lg" className="group bg-secondary/35 hover:bg-secondary/90 hover:text-secondary-foreground">
           <Link href="/products">
             Explorar Productos
             <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
