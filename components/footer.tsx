@@ -1,8 +1,14 @@
+"use client"
+
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { Facebook, Instagram, Twitter, CreditCard } from "lucide-react"
 import { Mail, House, Phone } from "lucide-react"
 
 export function Footer() {
+  const pathname = usePathname()
+  const isHome = pathname === "/"
+
   return (
     <footer className="bg-secondary/50 border-t border-border">
       <div className="container mx-auto px-4 py-12">
@@ -13,31 +19,28 @@ export function Footer() {
             <img src="/logo-OK-Juanita-Deco-2.png" alt="Juanita Deco" height={40} width={120} />
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <div className="flex space-y-2 space-x-4">
-              <div>
-                <Link href="/" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Inicio
-                </Link>
-              </div>
-              <div>
-                <Link href="#productos" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Productos
-                </Link>
-              </div>
-              <div>
-                <Link href="#ambientes" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Ambientes
-                </Link>
-              </div>
-              <div>
-                <Link href="#nosotros" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Nosotros
-                </Link>
+          {/* Quick Links - Solo en home */}
+          {isHome && (
+            <div>
+              <div className="flex space-y-2 space-x-4">
+                <div>
+                  <Link href="/" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                    Inicio
+                  </Link>
+                </div>
+                <div>
+                  <Link href="#productos" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                    Productos
+                  </Link>
+                </div>
+                <div>
+                  <Link href="#nosotros" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                    Nosotros
+                  </Link>
+                </div>
               </div>
             </div>
-          </div>
+          )}
 
           {/* Contact Info */}
             <div className="flex flex-col sm:flex-row justify-center items-center space-x-6">
