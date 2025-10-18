@@ -38,12 +38,13 @@ export function HighlightedSection() {
           </h2>
         </div>
 
-        {/* Grid de 3 tarjetas grandes, centradas */}
+        {/* Grid de 3 tarjetas */}
         <div className="mx-auto grid max-w-6xl grid-cols-1 md:grid-cols-3 gap-10">
-          {featuredProducts.map((item) => (
+          {featuredProducts.map((item, i) => (
             <article
               key={item.name}
-              className="group relative overflow-hidden rounded-md"
+              className={`group relative overflow-hidden rounded-md transform transition-all duration-500 
+                ${i === 1 ? "md:scale-110 md:z-10" : ""}`}
             >
               {/* Imagen */}
               <img
@@ -52,25 +53,28 @@ export function HighlightedSection() {
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
               />
 
-              {/* Overlay de degradado oscuro (de abajo hacia arriba) */}
+              {/* Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
 
-              {/* Contenido sobre la imagen */}
-              <div className="relative aspect-[3/4] p-5 sm:p-6 flex items-end">
+              {/* Contenido */}
+              <div className="relative aspect-[3/4] p-5 sm:p-6 flex items-end justify-center">
                 <div className="text-white max-w-[85%]">
-                  <h3 className="font-serif text-2xl sm:text-3xl font-semibold mb-2">
+                  <h6 className="font-serif text-xl sm:text-2xl font-semibold mb-2">
                     {item.name}
-                  </h3>
+                  </h6>
                   <p className="text-white/90 leading-relaxed text-sm sm:text-base mb-4 line-clamp-4">
                     {item.text}
                   </p>
 
-                  <Link
-                    href={item.href || "/products"}
-                    className="inline-block rounded-sm border border-white px-4 py-2 text-sm sm:text-base text-white transition-colors hover:bg-white/10"
-                  >
-                    Ver productos
-                  </Link>
+                  {/* Solo la card del medio muestra el botón */}
+                  {i === 1 && (
+                      <Link
+                        href={item.href || "/products"}
+                        className="inline-block rounded-sm border border-white px-4 py-2 text-sm sm:text-base text-white transition-colors hover:bg-white/10"
+                      >
+                        Ver productos
+                      </Link>
+                  )}
                 </div>
               </div>
             </article>
