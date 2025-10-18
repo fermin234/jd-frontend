@@ -1,9 +1,12 @@
 "use client"
 
 import { useState, useEffect, useMemo } from "react"
+import { useSearchParams } from "next/navigation"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { X } from "lucide-react"
 import { useCart } from "@/lib/cart-context"
 import { useToast } from "@/hooks/use-toast"
 
@@ -21,8 +24,18 @@ interface Product {
   updatedAt: string
 }
 
+interface Category {
+  id: string
+  name: string
+  imageUrl: string | null
+}
+
 export function ProductsSection() {
+  const searchParams = useSearchParams()
+  const categoryId = searchParams?.get("category")
+  
   const [products, setProducts] = useState<Product[]>([])
+  const [categories, setCategories] = useState<Category[]>([])
   const [loading, setLoading] = useState(true)
   const [sort, setSort] = useState<"latest" | "price-asc" | "price-desc">("latest")
 
@@ -39,10 +52,18 @@ export function ProductsSection() {
       try {
         setLoading(true)
         const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3002"
-        const res = await fetch(`${apiUrl}/products`)
-        if (!res.ok) throw new Error("No se pudieron cargar los productos")
-        const data: Product[] = await res.json()
-        setProducts(data)
+        
+        // Fetch products
+        const resProducts = await fetch(`${apiUrl}/products`)
+        if (!resProducts.ok) throw new Error("No se pudieron cargar los productos")
+        const dataProducts: Product[] = await resProducts.json()
+        setProducts(dataProducts)
+        
+        // Fetch categories
+        const resCategories = await fetch(`${apiUrl}/categories`)
+        if (!resCategories.ok) throw new Error("No se pudieron cargar las categorías")
+        const dataCategories: Category[] = await resCategories.json()
+        setCategories(dataCategories)
       } catch (e) {
         console.error(e)
       } finally {
@@ -52,8 +73,14 @@ export function ProductsSection() {
     fetchData()
   }, [])
 
+  // Filtrar productos por categoría si hay categoryId
+  const filteredProducts = useMemo(() => {
+    if (!categoryId) return products
+    return products.filter((p) => p.category?.id === categoryId)
+  }, [products, categoryId])
+
   const sorted = useMemo(() => {
-    const list = [...products]
+    const list = [...filteredProducts]
     if (sort === "price-asc") {
       list.sort((a, b) => (Number(a.price) || 0) - (Number(b.price) || 0))
     } else if (sort === "price-desc") {
@@ -63,7 +90,7 @@ export function ProductsSection() {
       list.sort((a, b) => +new Date(b.createdAt) - +new Date(a.createdAt))
     }
     return list
-  }, [products, sort])
+  }, [filteredProducts, sort])
 
   const handleAddToCart = (p: Product) => {
     const price = typeof p.price === "string" ? parseFloat(p.price) : p.price
@@ -99,12 +126,32 @@ export function ProductsSection() {
             <p className="text-lg md:text-xl max-w-2xl mx-auto">
               Descubre nuestra colección exclusiva de decoración para el hogar
             </p>
+            <div className="pt-4">
+              <Link href="/categories">
+                <Button variant="outline" className="bg-white/10 backdrop-blur-sm text-white border-white hover:bg-white hover:text-foreground transition-all">
+                  Ver Categorías
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
       <section id="productos" className="py-10 md:py-14">
         <div className="container mx-auto px-4">
+          {/* Filtro activo */}
+          {categoryId && (
+            <div className="mb-6 flex items-center gap-2">
+              <span className="text-sm text-muted-foreground">Filtrado por:</span>
+              <Badge variant="secondary" className="flex items-center gap-2">
+                {categories.find((c) => c.id === categoryId)?.name || "Categoría"}
+                <Link href="/products">
+                  <X className="h-3 w-3 cursor-pointer hover:text-destructive" />
+                </Link>
+              </Badge>
+            </div>
+          )}
+          
           {/* Barra superior */}
           <div className="mb-6 flex flex-wrap items-center justify-between gap-4 text-sm text-muted-foreground">
           <div>Mostrando 1–{total} de {total} resultados</div>
